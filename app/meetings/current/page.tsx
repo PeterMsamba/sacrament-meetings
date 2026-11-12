@@ -1,7 +1,10 @@
 import { redirect } from 'next/navigation';
+import { connection } from 'next/server';
 import { getMeetings } from '@/lib/meetings-db';
 
-export default function CurrentMeetingPage() {
+export default async function CurrentMeetingPage() {
+  await connection(); // Tells Next.js this is dynamically evaluated at request time
+
   const today = new Date();
   const dayOfWeek = today.getDay(); // 0 (Sun) to 6 (Sat)
   const sundayDate = new Date(today);
